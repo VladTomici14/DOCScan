@@ -11,7 +11,6 @@ import VisionKit
 
 final class TextRecognizer {
     let cameraScan: VNDocumentCameraScan
-    
     init (cameraScan: VNDocumentCameraScan) {
         self.cameraScan = cameraScan
     }
@@ -23,12 +22,22 @@ final class TextRecognizer {
         autoreleaseFrequency: .workItem
     )
     
+    func returnImages () -> [CGImage] {
+        let images = (0..<self.cameraScan.pageCount).compactMap({
+            self.cameraScan.imageOfPage(at: $0).cgImage
+        })
+        
+        return images
+    }
+    
+
+    
     func recognizeText (withCompletionHandler completionHandler: @escaping ([String]) -> Void) {
         queue.async {
             let images = (0..<self.cameraScan.pageCount).compactMap({
                 self.cameraScan.imageOfPage(at: $0).cgImage
             })
-            
+                        
             let imagesAndRequests = images.map({ (image: $0, request: VNRecognizeTextRequest()) })
             let textPerPage = imagesAndRequests.map {
                 image,
@@ -37,7 +46,7 @@ final class TextRecognizer {
                 
                 do {
                     try handler.perform([request])
-                    guard let observations = request.results as? [VNRecognizedTextObservation] else { return "" }
+                    guard let observations = request.results else { return "" }
                     
                     return observations.compactMap({
                         $0.topCandidates(1).first?.string
@@ -47,7 +56,6 @@ final class TextRecognizer {
                     return ""
                 }
             }
-            
             DispatchQueue.main.async {
                 completionHandler(textPerPage)
             }

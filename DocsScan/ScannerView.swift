@@ -8,27 +8,59 @@
 import SwiftUI
 import VisionKit
 
+class ScannedImagesHandler: NSObject {
+    var scannedImages: [UIImage] = []
+    
+    func addScannedImage(_ image: UIImage) {
+        scannedImages.append(image)
+    }
+    
+    func resetScannedImage() {
+        scannedImages.removeAll()
+    }
+}
+
+
 struct ScannerView: UIViewControllerRepresentable {
     
+    let scannedImagesHandler = ScannedImagesHandler()
+    
     func makeCoordinator() -> Coordinator {
-        return Coordinator(completion: completionHandler)
+        return Coordinator(
+            completion: completionHandler,
+            scannedImagesHandler: scannedImagesHandler
+        )
     }
     
     final class Coordinator: NSObject, VNDocumentCameraViewControllerDelegate {
         private let completionHandler: ([String]?) -> Void
+        private let scannedImagesHandler: ScannedImagesHandler
         
-        init(completion: @escaping ([String]?) -> Void) {
+        init(completion: @escaping ([String]?) -> Void, scannedImagesHandler: ScannedImagesHandler) {
             self.completionHandler = completion
+            self.scannedImagesHandler = scannedImagesHandler
         }
+        
         
         func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
             let recognizer = TextRecognizer(cameraScan: scan)
+            
             recognizer.recognizeText(withCompletionHandler: completionHandler)
+            
+            // ------ creating the array of scanned images ------
+            for pageNumber in 0..<scan.pageCount {
+                let image = scan.imageOfPage(at: pageNumber)
+
+                scannedImagesHandler.addScannedImage(image)
+                print(image)
+            }
+            
         }
         
         func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
             completionHandler(nil)
         }
+        
         
         func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
             completionHandler(nil)

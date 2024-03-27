@@ -17,6 +17,8 @@
 		C4C1505C2BB37C5200F5F926 /* ScanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C1505B2BB37C5200F5F926 /* ScanData.swift */; };
 		C4C150602BB37F5400F5F926 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C1505F2BB37F5400F5F926 /* ScannerView.swift */; };
 		C4C150622BB380B100F5F926 /* TextRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C150612BB380B100F5F926 /* TextRecognizer.swift */; };
+		C4C150682BB4054100F5F926 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C150672BB4054100F5F926 /* Utils.swift */; };
+		C4C1506A2BB406B400F5F926 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C150692BB406B400F5F926 /* HomeScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		C4C1505B2BB37C5200F5F926 /* ScanData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanData.swift; sourceTree = "<group>"; };
 		C4C1505F2BB37F5400F5F926 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		C4C150612BB380B100F5F926 /* TextRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognizer.swift; sourceTree = "<group>"; };
+		C4C150672BB4054100F5F926 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		C4C150692BB406B400F5F926 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,13 +106,15 @@
 		C4C1502F2BB37A2000F5F926 /* DocsScan */ = {
 			isa = PBXGroup;
 			children = (
-				C4C1505F2BB37F5400F5F926 /* ScannerView.swift */,
 				C4C150302BB37A2000F5F926 /* DocsScanApp.swift */,
 				C4C1505B2BB37C5200F5F926 /* ScanData.swift */,
+				C4C1505F2BB37F5400F5F926 /* ScannerView.swift */,
 				C4C150322BB37A2000F5F926 /* ContentView.swift */,
 				C4C150342BB37A2200F5F926 /* Assets.xcassets */,
 				C4C150362BB37A2200F5F926 /* Preview Content */,
 				C4C150612BB380B100F5F926 /* TextRecognizer.swift */,
+				C4C150672BB4054100F5F926 /* Utils.swift */,
+				C4C150692BB406B400F5F926 /* HomeScreen.swift */,
 			);
 			path = DocsScan;
 			sourceTree = "<group>";
@@ -270,9 +276,11 @@
 			files = (
 				C4C150332BB37A2000F5F926 /* ContentView.swift in Sources */,
 				C4C150602BB37F5400F5F926 /* ScannerView.swift in Sources */,
+				C4C1506A2BB406B400F5F926 /* HomeScreen.swift in Sources */,
 				C4C150622BB380B100F5F926 /* TextRecognizer.swift in Sources */,
 				C4C150312BB37A2000F5F926 /* DocsScanApp.swift in Sources */,
 				C4C1505C2BB37C5200F5F926 /* ScanData.swift in Sources */,
+				C4C150682BB4054100F5F926 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
