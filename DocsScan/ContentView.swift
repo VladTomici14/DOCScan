@@ -49,8 +49,8 @@ struct ContentView: View {
                             self.showScannerSheet = true;
                         },
                         label: {
-                            Image(systemName: "doc.text.viewfinder")
-                                .font(.title)
+                            Image(systemName: "person.circle")
+                                .font(.largeTitle)
                         }
                     )
                     .sheet(isPresented: $showScannerSheet, content: {
