@@ -85,3 +85,16 @@ struct ScannerView: UIViewControllerRepresentable {
         self.completionHandler = completionHandler
     }
 }
+
+struct ScanData: Identifiable {
+    var id = UUID()
+    var date: String
+    let text_content: String
+//    let scan_images: VNDocumentCameraScan
+    
+    init(text_content: String/*, scan_images: VNDocumentCameraScan*/) {
+        self.text_content = text_content
+//        self.scan_images = scan_images
+        self.date = Date().formatted()
+    }
+}
