@@ -10,10 +10,20 @@ import SwiftUI
 struct ContentView: View {
     @State private var showScannerSheet = false;
     @State private var scans:[ScanData] = []
-//    @State private var scannedImagesHandler = ScannedImagesHandler()
-        
-    var imageView: UIImageView!
+    @State private var isCopied = false {
+            didSet {
+                if isCopied == true {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        withAnimation {
+                            isCopied = false
+                        }
+                    }
+                }
+            }
+        }
     
+    private let CORNER_RADIUS: CGFloat = 15.0
+    var imageView: UIImageView!
     var body: some View {
         
         NavigationView {
