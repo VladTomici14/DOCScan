@@ -25,6 +25,7 @@ struct CopyAnimation: View {
     var body: some View {
         HStack {
             ZStack {
+                // ----- unfilled copy -----
                 copyIcon
                     .font(.largeTitle)
                     .foregroundColor(Color(.systemGray))
