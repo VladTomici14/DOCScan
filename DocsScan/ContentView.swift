@@ -22,19 +22,38 @@ struct ContentView: View {
                     List {
                         // TODO: this should use a ForEach for creating the List
                         ForEach (scans) { scan in NavigationLink(
-                                destination: {
-                                    ScrollView {
-//                                        Text("\(scannedImagesHandler.scannedImages.count)")
-                                        Text(scan.text_content).padding()
-                                    }
-                                },
-                                label: {
-                                    // TODO: format date in a more beautiful way
+                            destination: {
+                                ScrollView {
                                     
-//                                    Text(Utils.formatDate(scan.date)).lineLimit(1).bold()
-                                    Text(scan.date).lineLimit(1).bold()
-                                }
-                            )
+                                    // ------- scan text content -------
+                                    Text(scan.text_content)
+                                        .padding()
+                                        .textSelection(.enabled)
+                                    
+                                    // ------- copy text button -------
+                                    CopyAnimation()
+                                        .onTapGesture() {
+                                            let clipboard = UIPasteboard.general
+                                            clipboard.setValue(scan.text_content, forPasteboardType: UTType.plainText.identifier)
+                                        }
+                                    
+                                    // ------- images from the scan -------
+                                    var images = ["ss-1","ss-2","ss-3", "ss-4", "ss-5", "ss-6", "ss-7"]
+                                    // TODO: regarding the size of the scans, we can make a thing for the ImageSlideView either to be landscape or portrait (depends on how many pictures were took landscape or portrait moded
+                                    ImageSliderView(images: images).ignoresSafeArea().frame(height: 600)
+                                
+                                    
+                                    
+                                }.navigationTitle(scan.date)
+                            
+                            },
+                            label: {
+                                // TODO: format date in a more beautiful way
+                                
+                                //                                    Text(Utils.formatDate(scan.date)).lineLimit(1).bold()
+                                Text(scan.date).lineLimit(1).bold()
+                            }
+                        )
                         }
                     }
                 } else {
