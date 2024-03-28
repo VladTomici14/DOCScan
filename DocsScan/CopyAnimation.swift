@@ -27,9 +27,10 @@ struct CopyAnimation: View {
             ZStack {
                 // ----- unfilled copy -----
                 copyIcon
-                    .font(.largeTitle)
+                    .font(.title)
                     .foregroundColor(Color(.systemGray))
                 
+                    
                 // ----- inner stroke -----
                 Circle()
                     .strokeBorder(lineWidth:  removeInnerStroke ? 0 : 35)
@@ -37,23 +38,30 @@ struct CopyAnimation: View {
                     .foregroundColor(Color(.systemPink))
                     .scaleEffect(removeInnerStroke ? 1.3 : 0.0)
                     .hueRotation(.degrees(removeInnerStroke ? 270 : 0))
+            
                 
-                // ----- filled copy -----
-                copyIcon
-                    .font(.largeTitle)
-                    .foregroundColor(streamBlue)
-                    .scaleEffect(showHeart ? 1 : 0)
-
                 
                 // ----- circular splash -----
-                TwitterSplashView()
+                SplashView()
                     .scaleEffect(showSplash ? 1 : 0)
                     .opacity(removeSplash ? 0 : 1)
                 
+                // ----- filled copy -----
+                copyIcon
+                    .font(.title)
+                    .foregroundColor(streamBlue)
+                    .scaleEffect(showCopy ? 1 : 0)
+                    
+                }
+            
+                Text("\(copyText)")
+                    .foregroundColor(copyTextColor)
+                    .font(.title.bold())
+                
             }
             .onTapGesture {
-                withAnimation(.interpolatingSpring(stiffness: 170, damping: 10).delay(0.1)) {
-                    showHeart = true
+                withAnimation(.interpolatingSpring(stiffness: 300, damping: 30).delay(0.05)) {
+                    showCopy = true
                 }
                 
                 // EaseOut objects that exit the screen
@@ -67,7 +75,7 @@ struct CopyAnimation: View {
                 }
                 
                 // EaseIn objects that move onscreen
-                withAnimation(.easeIn.delay(0.2)) {
+                withAnimation(.easeIn.delay(0.5)) {
                     removeInnerStroke = true
                 }
                 
