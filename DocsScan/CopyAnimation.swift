@@ -14,18 +14,15 @@ struct CopyAnimation: View {
     @State private var copyTextColor = Color(.systemGray)
 
     
-    @State private var copyIcon = Image(systemName: "doc.on.doc")
+    @State private var copyIcon = Image(systemName: "doc.on.doc.fill")
     @State private var removeInnerStroke = false
-    @State private var showHeart = false
+    @State private var showCopy = false
     @State private var showSplash = false
     @State private var removeSplash = false
 
 
     
     var body: some View {
-        
-        Text("Copy").font(.title)
-        
         HStack {
             ZStack {
                 copyIcon
@@ -76,23 +73,54 @@ struct CopyAnimation: View {
                 copyText = "Copied"
                 copyTextColor = streamBlue
             }.accessibilityAddTraits(.isButton)
-            
-            Text("\(copyText)")
-                .foregroundColor(copyTextColor)
-                .font(.title)
-            
-        }
     
     }
 }
 
-struct TwitterContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        TestingAnimations()
-            .preferredColorScheme(.dark)
+struct SplashView: View {
+    @State private var innerGap = true
+    let streamBlue = Color(#colorLiteral(red: 0, green: 0.3725490196, blue: 1, alpha: 1))
+    
+    private let PARTICLE_RADIUS: CGFloat = 5.0
+    
+    var body: some View {
+        ZStack {
+            ForEach(0..<8) {
+                Circle()
+                    .foregroundStyle(
+                        .linearGradient(
+                            colors: [.green, .red],
+                            startPoint: .bottom,
+                            endPoint: .leading
+                        )
+                    )
+                    .frame(width: PARTICLE_RADIUS, height: PARTICLE_RADIUS)
+                    .offset(x: innerGap ? 26 : 0)
+                    .rotationEffect(.degrees(Double($0) * 45))
+                    .hueRotation(.degrees(300))
+            }
+            
+            ForEach(0..<8) {
+                Circle()
+                    .foregroundStyle(
+                        .linearGradient(
+                            colors: [.green, streamBlue],
+                            startPoint: .bottom,
+                            endPoint: .leading
+                        )
+                    )
+                    .frame(width: PARTICLE_RADIUS, height: PARTICLE_RADIUS)
+                    .offset(x: innerGap ? 30 : 0)
+                    .rotationEffect(.degrees(Double($0) * 45))
+                    .hueRotation(.degrees(60))
+                
+            }
+            .rotationEffect(.degrees(12))
+        }
     }
 }
 
+
 #Preview {
-    TestingAnimations()
+    CopyAnimation()
 }
