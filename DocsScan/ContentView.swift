@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct ContentView: View {
     @State private var showScannerSheet = false;
@@ -127,7 +128,45 @@ struct ContentView: View {
             }
         )
     }
+    
 }
+
+struct ImageSliderView: View {
+    /**
+     Function for showing the images to the use by sliding.
+     */
+    private let CORNER_RADIUS: CGFloat = 10.0
+    private var images_paths: [String] = []
+    @State private var selection = 0
+    
+    init (images: [String]) {
+        self.images_paths = images
+    }
+    
+    var body: some View {
+        
+        ZStack {
+            
+            TabView(selection: $selection) {
+                ForEach (0..<images_paths.count) { i in
+                    Image("\(images_paths[i])")
+                        .resizable()
+                        .frame(width: .infinity)
+                        .ignoresSafeArea()
+                        .clipShape(RoundedRectangle(cornerRadius: CORNER_RADIUS))
+                }
+            }
+            .tabViewStyle(PageTabViewStyle())
+            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .automatic))
+            .clipShape(RoundedRectangle(cornerRadius: CORNER_RADIUS))
+            
+        }
+        .ignoresSafeArea()
+        .padding()
+    }
+}
+
+
 
 #Preview {
     ContentView()
