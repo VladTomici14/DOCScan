@@ -77,6 +77,29 @@ struct ContentView: View {
                     })
             )
         }
+        Button(
+            action: {
+                self.showScannerSheet = true;
+            },
+            label: {
+                HStack {
+                    Image(systemName: "doc.on.doc")
+                    Text("Scan your document")
+                }
+                .foregroundColor(.white)
+                .font(.system(size: 16, weight: .semibold))
+                .frame(maxWidth: .infinity, minHeight: 52)
+                .background(.blue)
+                .cornerRadius(CORNER_RADIUS)
+                
+            }
+        )
+        .sheet(isPresented: $showScannerSheet, content: {
+            makeScannerView()
+        })
+        .padding()
+        .frame(width: .infinity, height: 50)
+        
     }
     
     private func makeScannerView() -> ScannerView {
