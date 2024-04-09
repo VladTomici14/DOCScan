@@ -42,7 +42,10 @@ struct ContentView: View {
     var imageView: UIImageView!
     var body: some View {
         
+
+        
         NavigationView {
+        
             VStack {
                 if scans.count > 0 {
                     List {
@@ -64,7 +67,7 @@ struct ContentView: View {
                                         }
                                     
                                     // ------- images from the scan -------
-                                    var images = ["ss-1","ss-2","ss-3", "ss-4", "ss-5", "ss-6", "ss-7"]
+                                    var images = ["ss-corect","ss-2","ss-3", "ss-4", "ss-5", "ss-6", "ss-7"]
                                     // TODO: regarding the size of the scans, we can make a thing for the ImageSlideView either to be landscape or portrait (depends on how many pictures were took landscape or portrait moded
                                     ImageSliderView(images: images).ignoresSafeArea().frame(height: 600)
                                 
@@ -86,7 +89,16 @@ struct ContentView: View {
                     Text("No scan done yet!").font(.title)
                 }
             }
-            .navigationTitle("DOCScan")
+//            .navigationTitle()
+            .toolbar {
+                ToolbarItem(placement: .navigation) {
+                    Image("logo-docscan-white")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 60)
+                        .padding()
+                }
+            }
             .navigationBarItems(
                 trailing:
                     Button(
@@ -184,5 +196,5 @@ struct ImageSliderView: View {
 
 
 #Preview {
-    ContentView2()
+    ContentView()
 }

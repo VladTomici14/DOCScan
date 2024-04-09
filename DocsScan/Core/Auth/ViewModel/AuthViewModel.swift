@@ -48,8 +48,6 @@ class AuthViewModel: ObservableObject {
         } catch {
             print("DEBUG: Failed to create user with error \(error.localizedDescription)")
         }
-        
-        
     }
     
     func signOut() {
@@ -60,7 +58,6 @@ class AuthViewModel: ObservableObject {
         } catch {
             print("DEBUG: Failed to sign out with error \(error.localizedDescription)")
         }
-        
     }
     
     func deleteAccount() {

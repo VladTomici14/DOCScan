@@ -19,7 +19,7 @@ struct DocsScanApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView2()
+            ContentView()
                 .environmentObject(viewModel)
                 .preferredColorScheme(.dark)
         }

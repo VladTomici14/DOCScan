@@ -15,6 +15,7 @@ struct ProfileView: View {
             List {
                 Section {
                     HStack {
+                        // ----- profile pic -----
                         Text(user.initials)
                             .font(.title)
                             .fontWeight(.semibold)
