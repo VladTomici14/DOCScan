@@ -196,5 +196,5 @@ struct ImageSliderView: View {
 
 
 #Preview {
-    ContentView()
+    ContentView2()
 }
