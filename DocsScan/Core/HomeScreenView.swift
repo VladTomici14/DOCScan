@@ -84,8 +84,6 @@ struct TitleView: View {
             .aspectRatio(contentMode: .fit)
             .frame(width: 250, alignment: .center)
             .accessibility(hidden: true)
-            
-        
     
         Text("Welcome to")
             .font(.title)
