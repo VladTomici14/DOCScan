@@ -19,9 +19,11 @@ struct DocsScanApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView2()
-                .environmentObject(viewModel)
-                .preferredColorScheme(.dark)
+//            ContentView2()
+//                .environmentObject(viewModel)
+//                .preferredColorScheme(.dark)
+            
+            ContentView()
         }
     }
 }
