@@ -5,6 +5,8 @@
 //  Created by Vlad Tomici on 29.03.2024.
 //
 
+// TODO: add warning of existing account
+
 import SwiftUI
 import Foundation
 
@@ -118,7 +120,7 @@ struct RegistrationView: View {
                             .frame(width: UIScreen.main.bounds.width - 32, height: 48)
                         }
                     )
-                    .background(Color(.systemBlue))
+                    .background(Color.mainBlue)
                     .cornerRadius(10)
                     .disabled(formIsValid)
                     .opacity(formIsValid ? 1.0 : 0.5)
@@ -153,14 +155,14 @@ func containsSpecialCharacterRegex(_ password: String) -> Bool {
 
 extension RegistrationView: AuthentificationFormProtocol {
     var formIsValid: Bool {
-        return
-        !email.isEmpty &&
-        email.contains("@") &&
-        !password.isEmpty &&
-        password.count >= 7 &&
-        containsNumberRegex(password) &&
-        containsSpecialCharacterRegex(password) &&
-        confirm_password == password
+        return 
+            !email.isEmpty &&
+            email.contains("@") &&
+            !password.isEmpty &&
+            password.count >= 7 &&
+            containsNumberRegex(password) &&
+            containsSpecialCharacterRegex(password) &&
+            confirm_password == password
     }
 }
 
