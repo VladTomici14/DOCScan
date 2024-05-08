@@ -9,24 +9,30 @@ import SwiftUI
 
 struct HomeScreen: View {
     var body: some View {
-        VStack(alignment: .center) {
-                        
-            TitleView()
+        
+        ZStack {
             
-            InformationContainerView()
+            WaveBackground(waveOpacity: 0.05)
             
-            Spacer(minLength: 30)
-            
-            Button(action: {
-                let generator = UINotificationFeedbackGenerator()
-                generator.notificationOccurred(.success)
-            }) {
-                Text("Continue")
-                    .customButton()
-            }
-            
+            VStack(alignment: .center) {
                 
-        }.padding(.horizontal)
+                TitleView()
+                
+                InformationContainerView()
+                
+                Spacer(minLength: 30)
+                
+                Button(action: {
+                    let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.success)
+                }) {
+                    Text("Continue")
+                        .customButton()
+                }
+                
+                
+            }.padding(.horizontal)
+        }
     }
     
 }
@@ -121,6 +127,66 @@ struct ButtonModifier: ViewModifier {
             )
             .padding(.bottom)
     }
+}
+
+
+struct WaveBackground: View {
+    
+    let universalSize = UIScreen.main.bounds
+    var waveOpacity: CGFloat = 0.05
+    
+    @State var isAnimated = false
+    
+    var body: some View {
+        
+        ZStack {
+            getSinWave(interval: universalSize.width * 1.5, baseline: 65 + universalSize.height / 2, amplitude: 110)
+                .foregroundColor(Color.init(red: 0.3, green: 0.6, blue: 1).opacity(waveOpacity))
+                .offset(x: isAnimated ? -1 * universalSize.width * 1.5 : 0)
+                .animation(Animation.linear(duration: 5).repeatForever(autoreverses: false))
+            
+            getSinWave(interval: universalSize.width, baseline: 70 + universalSize.height / 2, amplitude: 200)
+                .foregroundColor(Color.init(red: 0.3, green: 0.6, blue: 1).opacity(waveOpacity))
+                .offset(x: isAnimated ? -1 * universalSize.width : 0)
+                .animation(Animation.linear(duration: 11).repeatForever(autoreverses: false))
+            
+            getSinWave(interval: universalSize.width * 3, baseline: 95 + universalSize.height / 2, amplitude: 200)
+                .foregroundColor(Color.init(red: 0.3, green: 0.6, blue: 1).opacity(waveOpacity))
+                .offset(x: isAnimated ? -1 * universalSize.width * 3 : 0)
+                .animation(Animation.linear(duration: 4).repeatForever(autoreverses: false))
+            
+            getSinWave(interval: universalSize.width * 1.2, baseline: 75 + universalSize.height / 2, amplitude: 50)
+                .foregroundColor(Color.init(red: 0.3, green: 0.6, blue: 1).opacity(waveOpacity))
+                .offset(x: isAnimated ? -1 * universalSize.width * 1.2 : 0)
+                .animation(Animation.linear(duration: 5).repeatForever(autoreverses: false))
+            
+        }.onAppear() {
+            self.isAnimated = true
+        }
+    }
+    
+    func getSinWave(
+        interval: CGFloat,
+        baseline: CGFloat = UIScreen.main.bounds.height / 2,
+        amplitude: CGFloat = 100
+    ) -> Path {
+        Path { path in
+            path.move(to: CGPoint(x: 0, y: baseline))
+            path.addCurve(
+                to: CGPoint(x: interval, y: baseline),
+                control1: CGPoint(x: interval * (0.35), y: amplitude + baseline),
+                control2: CGPoint(x: interval * (0.65), y: -amplitude + baseline)
+            )
+            path.addCurve(
+                to: CGPoint(x: interval * 2, y: baseline),
+                control1: CGPoint(x: interval * (1.35), y: amplitude + baseline),
+                control2: CGPoint(x: interval * (1.65), y: -amplitude + baseline)
+            )
+            path.addLine(to: CGPoint(x: interval * 2, y: universalSize.height))
+            path.addLine(to: CGPoint(x: 0, y: universalSize.height))
+        }
+    }
+    
 }
 
 extension View {
