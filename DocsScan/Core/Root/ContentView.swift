@@ -8,23 +8,30 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-struct ContentView2: View {
-    @EnvironmentObject var viewModel: AuthViewModel
-    
-    var body: some View {
-        Group {
-            if $viewModel.userSession != nil {
-                ProfileView()
-            } else {
-                LoginView()
-            }
-        }
-    }
-}
+//struct ContentView2: View {
+//    @EnvironmentObject var viewModel: AuthViewModel
+//    
+//    var body: some View {
+//        Group {
+//            if $viewModel.userSession != nil {
+//                MainScreen()
+//            } else {
+//                LoginView()
+//            }
+//        }
+//    }
+//}
+
+
 
 struct ContentView: View {
+    
+    @StateObject var viewModel = AuthViewModel()
+    
+    
     var body: some View {
         HomeScreen()
+            .environmentObject(viewModel)
     }
 }
 
