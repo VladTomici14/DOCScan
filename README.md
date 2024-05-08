@@ -1,6 +1,6 @@
 #  DOCScan
 
-<img src="assets/icon-docscan-transparent-bg.png" style="width: 500px">
+<img src="assets/icon-docscan-transparent-bg.png" style="width: 350px">
 
 **Simplifying mobile document management!**
 
