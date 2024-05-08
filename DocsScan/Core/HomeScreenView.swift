@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeScreen: View {
+    @EnvironmentObject var viewModel: AuthViewModel
+    
     var body: some View {
         
         NavigationView {
@@ -26,8 +28,16 @@ struct HomeScreen: View {
                     
                     NavigationLink(
                         destination: {
-                            LoginView()
-                                .navigationBarBackButtonHidden(true)
+                            
+                            Group {
+                                if $viewModel.userSession != nil {
+                                    LoginView()
+                                        .navigationBarBackButtonHidden(true)
+                                } else {
+                                    MainScreen()
+                                }
+                            }
+                            
                         },
                         label: {
                             Text("Continue")
@@ -72,7 +82,6 @@ struct InformationContainerView: View {
         VStack(alignment: .leading) {
             InformationDetailView(
                 subTitle: "Maximize efficiency: automate text extraction, improve organization, optimize storage.",
-//                icon: "gearshape.2.fill")
                 icon: "paperclip")
             
             InformationDetailView(
