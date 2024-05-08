@@ -5,6 +5,8 @@
 //  Created by Vlad Tomici on 29.03.2024.
 //
 
+// TODO: dont you have an account ????? 
+
 import SwiftUI
 
 struct InputView: View {
@@ -18,7 +20,6 @@ struct InputView: View {
 
         VStack (alignment: .leading, spacing: 12) {
             Text(title)
-                .foregroundColor(Color(.white))
                 .fontWeight(.semibold)
                 .font(.footnote)
             
