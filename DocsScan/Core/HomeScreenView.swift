@@ -10,28 +10,33 @@ import SwiftUI
 struct HomeScreen: View {
     var body: some View {
         
-        ZStack {
+        NavigationView {
             
-            WaveBackground(waveOpacity: 0.05)
-            
-            VStack(alignment: .center) {
+            ZStack {
                 
-                TitleView()
+                WaveBackground(waveOpacity: 0.05)
                 
-                InformationContainerView()
-                
-                Spacer(minLength: 30)
-                
-                Button(action: {
-                    let generator = UINotificationFeedbackGenerator()
-                    generator.notificationOccurred(.success)
-                }) {
-                    Text("Continue")
-                        .customButton()
-                }
-                
-                
-            }.padding(.horizontal)
+                VStack(alignment: .center) {
+                    
+                    TitleView()
+                    
+                    InformationContainerView()
+                    
+                    Spacer(minLength: 30)
+                    
+                    NavigationLink(
+                        destination: {
+                            LoginView()
+                                .navigationBarBackButtonHidden(true)
+                        },
+                        label: {
+                            Text("Continue")
+                                .customButton()
+                        }
+                    )
+                    
+                }.padding(.horizontal)
+            }
         }
     }
     
@@ -67,7 +72,8 @@ struct InformationContainerView: View {
         VStack(alignment: .leading) {
             InformationDetailView(
                 subTitle: "Maximize efficiency: automate text extraction, improve organization, optimize storage.",
-                icon: "gearshape.2.fill")
+//                icon: "gearshape.2.fill")
+                icon: "paperclip")
             
             InformationDetailView(
                 subTitle: "Boost accessibility: streamline access to diverse information and swiftly search scanned documents for specific data",
@@ -129,7 +135,7 @@ struct ButtonModifier: ViewModifier {
     }
 }
 
-
+// -------- background wave animation --------
 struct WaveBackground: View {
     
     let universalSize = UIScreen.main.bounds

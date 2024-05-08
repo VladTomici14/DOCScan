@@ -13,7 +13,7 @@ struct ContentView2: View {
     
     var body: some View {
         Group {
-            if viewModel.userSession != nil {
+            if $viewModel.userSession != nil {
                 ProfileView()
             } else {
                 LoginView()
@@ -23,6 +23,12 @@ struct ContentView2: View {
 }
 
 struct ContentView: View {
+    var body: some View {
+        HomeScreen()
+    }
+}
+
+struct MainScreen: View {
     @State private var showScannerSheet = false;
     @State private var scans:[ScanData] = []
     @State private var isCopied = false {
@@ -41,8 +47,6 @@ struct ContentView: View {
     private let CORNER_RADIUS: CGFloat = 15.0
     var imageView: UIImageView!
     var body: some View {
-        
-
         
         NavigationView {
         
@@ -196,5 +200,5 @@ struct ImageSliderView: View {
 
 
 #Preview {
-    ContentView2()
+    ContentView()
 }
