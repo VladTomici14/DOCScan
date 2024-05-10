@@ -38,6 +38,7 @@ struct ContentView: View {
 struct MainScreen: View {
     @State private var showScannerSheet = false;
     @State private var scans:[ScanData] = []
+    var scansNames: [String] = []
     @State private var isCopied = false {
             didSet {
                 if isCopied == true {
@@ -50,6 +51,7 @@ struct MainScreen: View {
             }
         }
     @EnvironmentObject var viewModel: AuthViewModel
+    @State private var searchText = ""
     
     private let CORNER_RADIUS: CGFloat = 15.0
     var imageView: UIImageView!
@@ -57,75 +59,84 @@ struct MainScreen: View {
         
         NavigationView {
         
-            VStack {
-                if scans.count > 0 {
-                    List {
-                        // TODO: this should use a ForEach for creating the List
-                        ForEach (scans) { scan in NavigationLink(
-                            destination: {
-                                ScrollView {
+            NavigationStack {
+                VStack {
+                    if scans.count > 0 {
+                        List {
+                            // TODO: this should use a ForEach for creating the List
+                            ForEach (scans) { scan in NavigationLink(
+                                destination: {
+                                    ScrollView {
+                                        
+                                        // ------- scan text content -------
+                                        Text(scan.text_content)
+                                            .padding()
+                                            .textSelection(.enabled)
+                                        
+                                        
+                                        
+                                        // ------- copy text button -------
+                                        CopyAnimation()
+                                            .onTapGesture() {
+                                                let clipboard = UIPasteboard.general
+                                                clipboard.setValue(scan.text_content, forPasteboardType: UTType.plainText.identifier)
+                                            }
+                                        
+                                        // ------- images from the scan -------
+                                        var images = ["ss-corect","ss-2","ss-3", "ss-4", "ss-5", "ss-6", "ss-7"]
+                                        // TODO: regarding the size of the scans, we can make a thing for the ImageSlideView either to be landscape or portrait (depends on how many pictures were took landscape or portrait moded
+                                        ImageSliderView(images: images).ignoresSafeArea().frame(height: 600)
+                                        
+                                        
+                                        
+                                    }.navigationTitle(scan.date)
                                     
-                                    // ------- scan text content -------
-                                    Text(scan.text_content)
-                                        .padding()
-                                        .textSelection(.enabled)
+                                },
+                                label: {
+                                    // TODO: format date in a more beautiful way
                                     
-                                    // ------- copy text button -------
-                                    CopyAnimation()
-                                        .onTapGesture() {
-                                            let clipboard = UIPasteboard.general
-                                            clipboard.setValue(scan.text_content, forPasteboardType: UTType.plainText.identifier)
-                                        }
-                                    
-                                    // ------- images from the scan -------
-                                    var images = ["ss-corect","ss-2","ss-3", "ss-4", "ss-5", "ss-6", "ss-7"]
-                                    // TODO: regarding the size of the scans, we can make a thing for the ImageSlideView either to be landscape or portrait (depends on how many pictures were took landscape or portrait moded
-                                    ImageSliderView(images: images).ignoresSafeArea().frame(height: 600)
-                                
-                                    
-                                    
-                                }.navigationTitle(scan.date)
-                            
-                            },
-                            label: {
-                                // TODO: format date in a more beautiful way
-                                
-                                //                                    Text(Utils.formatDate(scan.date)).lineLimit(1).bold()
-                                Text(scan.date).lineLimit(1).bold()
+                                    //                                    Text(Utils.formatDate(scan.date)).lineLimit(1).bold()
+                                    Text(scan.date).lineLimit(1).bold()
+                                }
+                            )
                             }
-                        )
+                        }
+                    } else {
+                        Text("No scan done yet!").font(.title)
+                    }
+                }
+                //            .navigationTitle()
+                // TODO: add a spacer between the search bar and the toolbar 
+                .toolbar {
+                    ToolbarItem(placement: .navigation) {
+                        HStack (alignment: .center) {
+                            Image("logo-docscan-blue")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 40)
+                            
+                            Spacer(minLength: 150)
+                            
+                            Button(
+                                action: {
+                                    self.showScannerSheet = true;
+                                },
+                                label: {
+                                    Image(systemName: "person.circle")
+                                        .font(.largeTitle)
+                                        .foregroundColor(Color.mainBlue)
+                                }
+                            )
+                            .sheet(isPresented: $showScannerSheet, content: {
+                                makeScannerView()
+                            })
                         }
                     }
-                } else {
-                    Text("No scan done yet!").font(.title)
                 }
             }
-//            .navigationTitle()
-            .toolbar {
-                ToolbarItem(placement: .navigation) {
-                    Image("logo-docscan-white")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 60)
-                        .padding()
-                }
-            }
-            .navigationBarItems(
-                trailing:
-                    Button(
-                        action: {
-                            self.showScannerSheet = true;
-                        },
-                        label: {
-                            Image(systemName: "person.circle")
-                                .font(.largeTitle)
-                        }
-                    )
-                    .sheet(isPresented: $showScannerSheet, content: {
-                        makeScannerView()
-                    })
-            )
-        }
+            .searchable(text: $searchText)
+        }.navigationBarBackButtonHidden(true)
+        
         Button(
             action: {
                 self.showScannerSheet = true;
@@ -138,7 +149,7 @@ struct MainScreen: View {
                 .foregroundColor(.white)
                 .font(.system(size: 16, weight: .semibold))
                 .frame(maxWidth: .infinity, minHeight: 52)
-                .background(.blue)
+                .background(Color.mainBlue)
                 .cornerRadius(CORNER_RADIUS)
                 
             }
@@ -148,6 +159,14 @@ struct MainScreen: View {
         })
         .padding()
         .frame(width: .infinity, height: 50)
+        
+        var searchResults: [String] {
+            if searchText.isEmpty {
+                return scansNames
+            } else {
+                return scansNames.filter { $0.contains(searchText) }
+            }
+        }
         
     }
     
@@ -207,5 +226,6 @@ struct ImageSliderView: View {
 
 
 #Preview {
-    ContentView()
+    //    ContentView()
+        MainScreen()
 }
