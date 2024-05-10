@@ -31,9 +31,9 @@ struct HomeScreen: View {
                             
                             Group {
                                 if $viewModel.userSession != nil {
-                                    MainScreen()
-                                } else {
                                     LoginView().navigationBarBackButtonHidden(true)
+                                } else {
+                                    MainScreen()
                                 }
                             }
                             
