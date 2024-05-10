@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VisionKit
+import PDFKit
 
 class ScannedImagesHandler: NSObject {
     var scannedImages: [UIImage] = []
@@ -42,19 +43,42 @@ struct ScannerView: UIViewControllerRepresentable {
         }
         
         
-        func documentCameraViewController(
-            _ controller: VNDocumentCameraViewController,
-            didFinishWith scan: VNDocumentCameraScan) {
+        func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
+            
             let recognizer = TextRecognizer(cameraScan: scan)
             
             recognizer.recognizeText(withCompletionHandler: completionHandler)
             
+            let pdfDocument = PDFDocument()
+                
             // ------ creating the array of scanned images ------
             for pageNumber in 0..<scan.pageCount {
                 let image = scan.imageOfPage(at: pageNumber)
 
+                let pdfPage = PDFPage(image: image)
+                pdfDocument.insert(pdfPage!, at: pageNumber)
+                
                 scannedImagesHandler.addScannedImage(image)
                 print(image)
+            }
+            print(scannedImagesHandler.scannedImages)
+                
+            let pdfData = pdfDocument.dataRepresentation()
+                
+            let documentDirectory = FileManager.default.urls(
+                for: .documentDirectory,
+                in: .userDomainMask
+            ).first
+            
+            let docURL = (documentDirectory?.appendingPathComponent("Scanned-Docs.pdf"))!
+            
+            
+            do {
+        
+                try pdfData?.write(to: docURL)
+                print(docURL)
+            } catch (let error) {
+                print("ERROR: \(error)")
             }
             
         }

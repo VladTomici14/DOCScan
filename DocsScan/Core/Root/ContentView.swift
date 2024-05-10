@@ -84,6 +84,11 @@ struct MainScreen: View {
                                             .ignoresSafeArea()
                                             .frame(height: 600)
                                         
+                                        var url: URL = URL(fileURLWithPath: "file:///var/mobile/Containers/Data/Application/A7B3A219-E9AC-4C01-AF28-09E2941A93C7/Documents/Scanned-Docs.pdf")
+                                        
+                                        PDFKitView(url: url)
+
+                                        
                                     }.navigationTitle(scan.date)
                                     
                                 },
