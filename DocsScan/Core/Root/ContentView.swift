@@ -102,40 +102,40 @@ struct MainScreen: View {
                             }
                         }
                     } else {
-                        Text("No scan done yet!").font(.title)
+                        Text("No scan done yet!")
+//                        Text("Nicio scanare efectuată!")
+                            .font(.title)
                     }
                 }
-                //            .navigationTitle()
-                // TODO: add a spacer between the search bar and the toolbar 
+                // TODO: add a spacer between the search bar and the toolbar
                 .toolbar {
-                    ToolbarItem(placement: .navigation) {
-                        HStack (alignment: .center) {
-                            Image("logo-docscan-blue")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 40)
-                            
-                            Spacer(minLength: 150)
-                            
-                            Button(
-                                action: {
-                                    self.showScannerSheet = true;
-                                },
-                                label: {
-                                    Image(systemName: "person.circle")
-                                        .font(.largeTitle)
-                                        .foregroundColor(Color.mainBlue)
-                                }
-                            )
-                            .sheet(isPresented: $showScannerSheet, content: {
-                                makeScannerView()
-                            })
-                        }
+                    ToolbarItem(placement: .topBarLeading) {
+                        Image("logo-docscan-blue")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 40)
+                    }
+                    
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(
+                            action: {
+                                self.showScannerSheet = true;
+                            },
+                            label: {
+                                Image(systemName: "person.fill")
+                                    .font(.largeTitle)
+                                    .foregroundColor(Color.mainBlue)
+                            }
+                        )
+                        .sheet(isPresented: $showScannerSheet, content: {
+                            makeScannerView()
+                        })
                     }
                 }
             }
             .searchable(text: $searchText)
-        }.navigationBarBackButtonHidden(true)
+        }
+        .navigationBarBackButtonHidden(true)
         
         Button(
             action: {
@@ -145,6 +145,7 @@ struct MainScreen: View {
                 HStack {
                     Image(systemName: "doc.on.doc")
                     Text("Scan your document")
+//                    Text("Scanează documentul")
                 }
                 .foregroundColor(.white)
                 .font(.system(size: 16, weight: .semibold))
@@ -169,6 +170,11 @@ struct MainScreen: View {
         }
         
     }
+    
+    // TODO: we need to create a function for showing the profile view
+//    private func makeProfileView() -> ProfileView {
+//        ProfileView()
+//    }
     
     private func makeScannerView() -> ScannerView {
         ScannerView(
