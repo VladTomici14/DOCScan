@@ -10,7 +10,7 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @EnvironmentObject var viewModel: AuthViewModel
-    
+
     var body: some View {
         
         NavigationStack {
@@ -26,47 +26,56 @@ struct LoginView: View {
                         .frame(width: 250)
                         .padding(.bottom)
                     
-                    VStack {
+                    VStack(spacing: 24) {
                         // ----- form fileds -----
-                        VStack {
-                            InputView(
-                                text: $email,
-                                title: "Email Address",
-                                placeHolder: "example@email.com",
-                                isSeculreField: false)
-                            .autocapitalization(.none)
+                        InputView(
+                            text: $email,
+                            title: "Email Address",
+                            placeHolder: "example@email.com",
+                            isSeculreField: false)
+                        .autocapitalization(.none)
                             
-                            InputView(
-                                text: $password,
-                                title: "Password",
-                                placeHolder: "Enter your password",
-                                isSeculreField: true)
-                            .autocapitalization(.none)
-                        }
-                        .padding(.horizontal)
-                        //                    .padding(.top, 24)
+                        InputView(
+                            text: $password,
+                            title: "Password",
+                            placeHolder: "Enter your password",
+                            isSeculreField: true)
+                        .autocapitalization(.none)
                         
                         // ----- sign in button -----
-                        Button (
-                            action: {
-                                Task {
-                                    print("test")
-                                    try await viewModel.signIn(withEmail: email, password: password)
-                                }
-                            }, label: {
-                                HStack{
-                                    Text("Sign in")
-                                    Image(systemName: "arrow.right")
-                                }
-                                .bold()
-                                .foregroundColor(.white)
-                                .frame(width: UIScreen.main.bounds.width - 32, height: 48)
+                        Button {
+                            Task {
+                                print("test")
+                                try await viewModel.signIn(withEmail: email, password: password)
+
                             }
-                        )
-                        .background(Color.mainBlue)
-                        .cornerRadius(10)
-                        .disabled(formIsValid)
-                        .opacity(formIsValid ? 1.0 : 0.5)
+                        } label: {
+                            HStack {
+                                Text("Sign in")
+                                Image(systemName: "arrow.right")
+                            }
+                        }
+
+//                        Button (
+//                            action: {
+//                                Task {
+//                                    print("test")
+//                                    try await viewModel.signIn(withEmail: email, password: password)
+//                                }
+//                            }, label: {
+//                                HStack{
+//                                    Text("Sign in")
+//                                    Image(systemName: "arrow.right")
+//                                }
+//                                .bold()
+//                                .foregroundColor(.white)
+//                                .frame(width: UIScreen.main.bounds.width - 32, height: 48)
+//                            }
+//                        )
+//                        .background(Color.mainBlue)
+//                        .cornerRadius(10)
+//                        .disabled(formIsValid)
+//                        .opacity(formIsValid ? 1.0 : 0.5)
                         
                         Spacer()
                         
@@ -85,6 +94,8 @@ struct LoginView: View {
                         )
                     }
                 }
+                .padding(.horizontal)
+                .padding(.top)
             }
         }
     }

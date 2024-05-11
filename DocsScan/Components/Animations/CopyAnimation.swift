@@ -11,6 +11,7 @@ struct CopyAnimation: View {
     
     let streamBlue = Color(#colorLiteral(red: 0, green: 0.3725490196, blue: 1, alpha: 1))
     @State private var copyText: String = "Copy"
+//    @State private var copyText: String = "Copiază"
     @State private var copyTextColor = Color(.systemGray)
 
     
@@ -80,6 +81,7 @@ struct CopyAnimation: View {
                 }
                 
                 copyText = "Copied"
+//                copyText = "Copiat"
                 copyTextColor = streamBlue
             }.accessibilityAddTraits(.isButton)
     
