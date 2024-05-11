@@ -35,11 +35,16 @@ struct InputView: View {
 
 
 struct InputView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        InputView(text: .constant(""), title: "Email Address", placeHolder: "name@example.com")
+        InputView(
+            text: .constant(""),
+            title: "Email Address",
+            placeHolder: "name@.com"
+        )
     }
 }
 
-//#Preview {
-//    InputView()
-//}
+#Preview {
+    InputView_Previews() as! any View
+}

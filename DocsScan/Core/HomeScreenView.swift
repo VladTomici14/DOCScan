@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+//struct ContentView2: View {
+//    @EnvironmentObject var viewModel: AuthViewModel
+//
+//    var body: some View {
+//        Group {
+//            if $viewModel.userSession != nil {
+//                MainScreen()
+//            } else {
+//                LoginView()
+//            }
+//        }
+//    }
+//}
+
 struct HomeScreen: View {
     @EnvironmentObject var viewModel: AuthViewModel
     
@@ -30,10 +44,11 @@ struct HomeScreen: View {
                         destination: {
                             
                             Group {
-                                if $viewModel.userSession != nil {
-                                    LoginView().navigationBarBackButtonHidden(true)
-                                } else {
+                                if viewModel.userSession != nil {
                                     MainScreen()
+                                } else {
+                                    LoginView().navigationBarBackButtonHidden(true)
+
                                 }
                             }
                             
@@ -45,8 +60,28 @@ struct HomeScreen: View {
                         }
                     )
                     
+                    ShowCurrentUser(viewModel: viewModel)
+                    
                 }.padding(.horizontal)
             }
+        }
+    }
+    
+}
+
+struct ShowCurrentUser: View {
+    
+    var viewModel: AuthViewModel
+    
+    var body: some View {
+        if viewModel.currentUser != nil {
+            Text("Welcome back \(viewModel.currentUser?.fullname)")
+                .font(.subheadline)
+                .foregroundColor(.green)
+        } else {
+            Text("No user logged in!")
+                .font(.subheadline)
+                .foregroundColor(.red)
         }
     }
     

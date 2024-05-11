@@ -17,6 +17,8 @@ struct RegistrationView: View {
     @State private var password: String = ""
     @State private var confirm_password: String = ""
     @EnvironmentObject var viewModel: AuthViewModel
+    // TODO: possible need of adding this, check 1:01:55 from the video
+    // @Environment(\.dismiss) var dismiss
     
     var body: some View {
         NavigationStack {
@@ -105,25 +107,38 @@ struct RegistrationView: View {
                     .padding(.top, 24)
                     
                     // ----- sign up button -----
-                    Button (
-                        action: {
-                            Task {
-                                try await viewModel.createUser(withEmail: email, password: password, fullname: fullname)
-                            }
-                        }, label: {
-                            HStack{
-                                Text("Sign up")
-                                Image(systemName: "arrow.up")
-                            }
-                            .bold()
-                            .foregroundColor(.white)
-                            .frame(width: UIScreen.main.bounds.width - 32, height: 48)
+                    Button {
+                        Task {
+                            print("test2")
+                            try await viewModel.createUser(withEmail: email, password: password, fullname: fullname)
+
                         }
-                    )
-                    .background(Color.mainBlue)
-                    .cornerRadius(10)
-                    .disabled(formIsValid)
-                    .opacity(formIsValid ? 1.0 : 0.5)
+                    } label: {
+                        HStack {
+                            Text("Sign up")
+                            Image(systemName: "arrow.up")
+                        }
+                    }
+                    
+//                    Button (
+//                        action: {
+//                            Task {
+//                                try await viewModel.createUser(withEmail: email, password: password, fullname: fullname)
+//                            }
+//                        }, label: {
+//                            HStack{
+//                                Text("Sign up")
+//                                Image(systemName: "arrow.up")
+//                            }
+//                            .bold()
+//                            .foregroundColor(.white)
+//                            .frame(width: UIScreen.main.bounds.width - 32, height: 48)
+//                        }
+//                    )
+//                    .background(Color.mainBlue)
+//                    .cornerRadius(10)
+//                    .disabled(formIsValid)
+//                    .opacity(formIsValid ? 1.0 : 0.5)
                     
                     Spacer()
                     
