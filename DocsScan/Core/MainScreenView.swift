@@ -10,8 +10,8 @@ import SwiftUI
 struct MainScreen: View {
     @State private var showScannerSheet = false
     @State private var showProfileView = false
-    @State private var scans:[ScanData] = []
-    @State private var searchText = ""
+    @State private var scans: [ScanData] = []
+    @State private var searchText: String = ""
     @State private var isCopied = false {
             didSet {
                 if isCopied == true {
@@ -38,7 +38,7 @@ struct MainScreen: View {
                 VStack {
                     if scans.count > 0 {
                         List {
-                            ForEach (scans) { scan in NavigationLink(
+                            ForEach (searchResults) { scan in NavigationLink(
                                 destination: {
                                     ScrollView {
                                         
@@ -76,6 +76,7 @@ struct MainScreen: View {
                             .font(.title)
                     }
                 }
+                .searchable(text: $searchText)
                 .sheet(isPresented: $showProfileView, content: {
                     ProfileView(viewModel: _viewModel)
                 })
@@ -118,8 +119,6 @@ struct MainScreen: View {
                     }
                 }
             }
-            // TODO: Fix searching of content in the documents that were scanned
-            .searchable(text: $searchText)
         }
         .navigationBarBackButtonHidden(true)
         
@@ -147,14 +146,14 @@ struct MainScreen: View {
         .padding()
         .frame(width: .infinity, height: 50)
         
-        var searchResults: [String] {
-            if searchText.isEmpty {
-                return scansNames
-            } else {
-                return scansNames.filter { $0.contains(searchText) }
-            }
+    }
+    
+    var searchResults: [ScanData] {
+        if searchText.isEmpty {
+            return scans
+        } else {
+            return scans.filter { $0.text_content.lowercased().contains(searchText.lowercased()) }
         }
-        
     }
     
     private func makeScannerView() -> ScannerView {
