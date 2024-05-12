@@ -60,6 +60,22 @@ class AuthViewModel: ObservableObject {
         }
     }
     
+    func sendRecoveryEmail(withEmail email: String) {
+        do {
+            try Auth.auth().sendPasswordReset(withEmail: email) { error in
+            
+                if let err = error {
+                    print("hell nah")
+                } else {
+                    print("success")
+                }
+            }
+        } catch {
+            print("DEBUG: Failed to create user with error \(error.localizedDescription)")
+
+        }
+    }
+    
     func deleteAccount() {
         print("delete account")
     }
