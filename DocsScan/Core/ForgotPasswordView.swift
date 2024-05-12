@@ -47,7 +47,6 @@ struct ForgotPasswordView: View {
                             Image(systemName: "arrow.uturn.left")
                         }.foregroundColor(Color.mainBlue)
                     }
-
                     
                 }
                 .padding(.horizontal)
