@@ -1,10 +1,6 @@
 
 import SwiftUI
 
-// TODO: change the width of the singin button and the field forms
-// TODO: find a better design for the background
-// TODO: check for the implementation of loggining in with google/apple
-
 struct LoginView: View {
     
     @State private var email = ""
@@ -76,6 +72,7 @@ struct LoginView: View {
                             .background(Color.mainBlue)
                             .cornerRadius(15.0)
                         }
+                        
 
 //                        Button (
 //                            action: {
