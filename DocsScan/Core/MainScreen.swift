@@ -72,7 +72,6 @@ struct MainScreen: View {
                         }
                     } else {
                         Text("No scan done yet!")
-//                        Text("Nicio scanare efectuată!")
                             .font(.title)
                     }
                 }
@@ -86,8 +85,7 @@ struct MainScreen: View {
                     
                     ToolbarItem(placement: .topBarTrailing) {
                         
-                        
-                        // THIS SHIT SHOULD NOT REDIRECT TO SCANNER SHEET
+                        // ----- profile view button -----
                         Button(
                             action: {
                                 Task {
@@ -111,6 +109,7 @@ struct MainScreen: View {
         }
         .navigationBarBackButtonHidden(true)
         
+        // ----- scan button -----
         Button(
             action: {
                 self.showScannerSheet = true;
@@ -119,7 +118,6 @@ struct MainScreen: View {
                 HStack {
                     Image(systemName: "doc.on.doc")
                     Text("Scan your document")
-//                    Text("Scanează documentul")
                 }
                 .foregroundColor(.white)
                 .font(.system(size: 16, weight: .semibold))
