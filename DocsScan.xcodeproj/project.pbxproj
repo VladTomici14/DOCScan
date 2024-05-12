@@ -39,6 +39,7 @@
 		C4C150622BB380B100F5F926 /* TextRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C150612BB380B100F5F926 /* TextRecognizer.swift */; };
 		C4C150682BB4054100F5F926 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C150672BB4054100F5F926 /* Utils.swift */; };
 		C4C1506A2BB406B400F5F926 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C150692BB406B400F5F926 /* HomeScreenView.swift */; };
+		C4DEEF642BF106CD00DB77ED /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DEEF632BF106CD00DB77ED /* ForgotPasswordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		C4C150612BB380B100F5F926 /* TextRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognizer.swift; sourceTree = "<group>"; };
 		C4C150672BB4054100F5F926 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C4C150692BB406B400F5F926 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
+		C4DEEF632BF106CD00DB77ED /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				C46F93F72BB5916A00257E0B /* WindowScreenView.swift */,
 				C42A306F2BB6C5D000DC377A /* Root */,
 				C43BB4472BEF6F3000A0E5EE /* MainScreen.swift */,
+				C4DEEF632BF106CD00DB77ED /* ForgotPasswordView.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				C42A30752BB6D14400DC377A /* RegistrationView.swift in Sources */,
 				C4C150332BB37A2000F5F926 /* ContentView.swift in Sources */,
 				C4C150602BB37F5400F5F926 /* ScannerView.swift in Sources */,
+				C4DEEF642BF106CD00DB77ED /* ForgotPasswordView.swift in Sources */,
 				C4C1506A2BB406B400F5F926 /* HomeScreenView.swift in Sources */,
 				C42A30782BBAA4FD00DC377A /* ProfileView.swift in Sources */,
 				C49FEBC72BBAE5EE007F5F2D /* AuthViewModel.swift in Sources */,
