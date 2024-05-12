@@ -56,9 +56,7 @@ struct ProfileView: View {
                     
                     // ------- sign out button -------
                     Button {
-
                         viewModel.signOut()
-                        
                     }  label: {
                         SettingsRowView(
                             imageName: "arrow.left.circle.fill",
@@ -67,15 +65,17 @@ struct ProfileView: View {
                     }
                     
                     // ------- delete account -------
-                    Button {
-                        print("deleting account...")
-                    }  label: {
-                        SettingsRowView(
-                            imageName: "trash.fill",
-                            title: "Delete account",
-                            tintColor: Color(.systemRed))
-                    }
-                    
+                    // TODO: think about account deletion
+//                    Button {
+//                        print("deleting account")
+//                        viewModel.deleteAccount()
+//                    }  label: {
+//                        SettingsRowView(
+//                            imageName: "trash.fill",
+//                            title: "Delete account",
+//                            tintColor: Color(.systemRed))
+//                    }
+//                    
                 }
                 
             }
