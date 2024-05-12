@@ -77,7 +77,13 @@ class AuthViewModel: ObservableObject {
     }
     
     func deleteAccount() {
-        print("delete account")
+        do {
+            try Auth.auth().currentUser?.delete()
+            self.userSession = nil
+        } catch {
+            print("DEBUG: Failed to create user with error \(error.localizedDescription)")
+        }
+        
     }
     
     func fetchUser() async {
