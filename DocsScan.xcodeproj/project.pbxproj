@@ -130,6 +130,7 @@
 				C42A30712BB6C81E00DC377A /* Auth */,
 				C4C1505F2BB37F5400F5F926 /* ScannerView.swift */,
 				C4C150692BB406B400F5F926 /* HomeScreenView.swift */,
+				C42A30772BBAA4FD00DC377A /* ProfileView.swift */,
 				C46F93F72BB5916A00257E0B /* WindowScreenView.swift */,
 				C42A306F2BB6C5D000DC377A /* Root */,
 				C43BB4472BEF6F3000A0E5EE /* MainScreen.swift */,
@@ -149,6 +150,7 @@
 		C42A306E2BB6C5B000DC377A /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C49FEBBE2BBAAC24007F5F2D /* Model */,
 				C42A30702BB6C5EA00DC377A /* Animations */,
 				C4C150612BB380B100F5F926 /* TextRecognizer.swift */,
 				C4C150672BB4054100F5F926 /* Utils.swift */,
@@ -181,14 +183,6 @@
 				C49FEBC42BBAE5C2007F5F2D /* View */,
 			);
 			path = Auth;
-			sourceTree = "<group>";
-		};
-		C42A30762BBAA4E300DC377A /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				C42A30772BBAA4FD00DC377A /* ProfileView.swift */,
-			);
-			path = Profile;
 			sourceTree = "<group>";
 		};
 		C49FEBBE2BBAAC24007F5F2D /* Model */ = {
@@ -246,8 +240,6 @@
 				C42A306C2BB6C59000DC377A /* Core */,
 				C4C150342BB37A2200F5F926 /* Assets.xcassets */,
 				C4AE571E2BEAC34700458531 /* Colors.xcassets */,
-				C49FEBBE2BBAAC24007F5F2D /* Model */,
-				C42A30762BBAA4E300DC377A /* Profile */,
 				C4C150362BB37A2200F5F926 /* Preview Content */,
 			);
 			path = DocsScan;
