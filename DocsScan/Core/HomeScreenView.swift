@@ -60,7 +60,17 @@ struct HomeScreen: View {
                         }
                     )
                     
-                    ShowCurrentUser(viewModel: viewModel)
+                    // ----- showing current user that is logged in -----
+                    if viewModel.currentUser != nil {
+                        Text("Welcome back \(viewModel.currentUser?.fullname)")
+                            .font(.headline)
+                            .foregroundColor(Color.passwordGreen)
+                    } else {
+                        Text("No user logged in!")
+                            .font(.headline)
+                            .foregroundColor(Color.passwordRed)
+                    }
+                    
                     
                 }.padding(.horizontal)
             }
