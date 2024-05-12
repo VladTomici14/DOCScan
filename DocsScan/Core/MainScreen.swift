@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct MainScreen: View {
-    @State private var showScannerSheet = false;
+    @State private var showScannerSheet = false
+    @State private var showProfileView = false
     @State private var scans:[ScanData] = []
     @State private var searchText = ""
     @State private var isCopied = false {
@@ -75,6 +76,9 @@ struct MainScreen: View {
                             .font(.title)
                     }
                 }
+                .sheet(isPresented: $showProfileView, content: {
+                    ProfileView(viewModel: _viewModel)
+                })
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Image("logo-docscan-blue")
@@ -86,25 +90,35 @@ struct MainScreen: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         
                         // ----- profile view button -----
-                        Button(
-                            action: {
-                                Task {
-                                    print("user signed out")
-                                    viewModel.signOut()
-                                }
-                            },
-                            label: {
-                                Image(systemName: "door.left.hand.open")
-                                    .font(.largeTitle)
-                                    .foregroundColor(.red)
-                            }
-                        )
-                        .sheet(isPresented: $showScannerSheet, content: {
-                            makeScannerView()
-                        })
+                        Button {
+                            showProfileView.toggle()
+                        } label: {
+                            Image(systemName: "person.fill")
+                                .font(.largeTitle)
+                                .foregroundColor(Color.mainBlue)
+                        }
+                        
+//                        Button(
+//                            action: {
+//                                Task {
+//                                    print("user signed out")
+//                                    viewModel.signOut()
+//                                    
+//                                }
+//                            },
+//                            label: {
+//                                Image(systemName: "door.left.hand.open")
+//                                    .font(.largeTitle)
+//                                    .foregroundColor(.red)
+//                            }
+//                        )
+//                        .sheet(isPresented: $showScannerSheet, content: {
+//                            makeScannerView()
+//                        })
                     }
                 }
             }
+            // TODO: Fix searching of content in the documents that were scanned
             .searchable(text: $searchText)
         }
         .navigationBarBackButtonHidden(true)
@@ -142,11 +156,6 @@ struct MainScreen: View {
         }
         
     }
-    
-    // TODO: we need to create a function for showing the profile view
-//    private func makeProfileView() -> ProfileView {
-//        ProfileView()
-//    }
     
     private func makeScannerView() -> ScannerView {
         ScannerView(
