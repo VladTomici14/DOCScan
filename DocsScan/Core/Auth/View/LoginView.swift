@@ -70,6 +70,11 @@ struct LoginView: View {
                                 Text("Sign in")
                                 Image(systemName: "arrow.right")
                             }
+                            .foregroundColor(.white)
+                            .font(.system(size: 16, weight: .semibold))
+                            .frame(maxWidth: .infinity, minHeight: 52)
+                            .background(Color.mainBlue)
+                            .cornerRadius(15.0)
                         }
 
 //                        Button (
@@ -103,9 +108,10 @@ struct LoginView: View {
                             },
                             label: {
                                 HStack() {
-                                    Text("Don't you have an account ?")
-                                    Text("Sign up").bold()
-                                }
+                                    Text("Don't have an account ?")
+                                    Text("Sign up")
+                                        .bold()
+                                }.foregroundColor(Color.mainBlue)
                             }
                         )
                     }

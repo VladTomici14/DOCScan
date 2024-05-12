@@ -101,48 +101,33 @@ struct RegistrationView: View {
                             }.padding(.leading, 60)
                         }
                         
+                        // ----- sign up button -----
+                        Button {
+                            Task {
+                                print("test2")
+                                try await viewModel.createUser(withEmail: email, password: password, fullname: fullname)
+
+                            }
+                        } label: {
+                            HStack {
+                                Text("Sign up")
+                                Image(systemName: "arrow.up")
+                            }
+                            .foregroundColor(.white)
+                            .font(.system(size: 16, weight: .semibold))
+                            .frame(maxWidth: .infinity, minHeight: 52)
+                            .background(Color.mainBlue)
+                            .cornerRadius(15.0)
+                        }
                         
+                        Spacer()
                     }
                     .padding(.horizontal)
                     .padding(.top, 24)
                     
-                    // ----- sign up button -----
-                    Button {
-                        Task {
-                            print("test2")
-                            try await viewModel.createUser(withEmail: email, password: password, fullname: fullname)
 
-                        }
-                    } label: {
-                        HStack {
-                            Text("Sign up")
-                            Image(systemName: "arrow.up")
-                        }
-                    }
-                    
-//                    Button (
-//                        action: {
-//                            Task {
-//                                try await viewModel.createUser(withEmail: email, password: password, fullname: fullname)
-//                            }
-//                        }, label: {
-//                            HStack{
-//                                Text("Sign up")
-//                                Image(systemName: "arrow.up")
-//                            }
-//                            .bold()
-//                            .foregroundColor(.white)
-//                            .frame(width: UIScreen.main.bounds.width - 32, height: 48)
-//                        }
-//                    )
-//                    .background(Color.mainBlue)
-//                    .cornerRadius(10)
-//                    .disabled(formIsValid)
-//                    .opacity(formIsValid ? 1.0 : 0.5)
-                    
-                    Spacer()
-                    
                 }
+                
             }
             
         }
