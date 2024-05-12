@@ -9,6 +9,7 @@ struct LoginView: View {
     
     @State private var email = ""
     @State private var password = ""
+    @State private var showForgottenPasswordView = false
     @EnvironmentObject var viewModel: AuthViewModel
 
     var body: some View {
@@ -31,7 +32,7 @@ struct LoginView: View {
                         InputView(
                             text: $email,
                             title: "Email Address",
-                            placeHolder: "example@email.com",
+                            placeHolder:   "example@email.com",
                             isSeculreField: false)
                         .autocapitalization(.none)
                             
@@ -41,6 +42,21 @@ struct LoginView: View {
                             placeHolder: "Enter your password",
                             isSeculreField: true)
                         .autocapitalization(.none)
+                        
+                        // ----- password forgotten button -----
+                        Button {
+                            showForgottenPasswordView.toggle()
+                        } label: {
+                            Text("Forgot your password?")
+                                .fontWeight(.semibold)
+                                .font(.footnote)
+                                .foregroundColor(Color.mainBlue)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+
+                        }.sheet(isPresented: $showForgottenPasswordView,
+                                content: {
+                            ForgotPasswordView()
+                        })
                         
                         // ----- sign in button -----
                         Button {
