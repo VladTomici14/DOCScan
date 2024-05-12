@@ -55,7 +55,6 @@ struct HomeScreen: View {
                         },
                         label: {
                             Text("Continue")
-//                            Text("Continuă")
                                 .customButton()
                         }
                     )
@@ -127,17 +126,14 @@ struct InformationContainerView: View {
         VStack(alignment: .leading) {
             InformationDetailView(
                 subTitle: "Maximize efficiency: automate text extraction, improve organization, optimize storage.",
-//                subTitle: "Maximizarea eficienței: extracție de text automată, dezvoltarea organizării, optimizarea stocării.",
                 icon: "paperclip")
             
             InformationDetailView(
                 subTitle: "Boost accessibility: streamline access to diverse information and swiftly search scanned documents for specific data",
-//                subTitle: "Creșterea accesibilității: facilitează accesul la informații și permite căutarea de date specifice din documente.",
                 icon: "figure.run.circle.fill")
             
             InformationDetailView(
                 subTitle: "Decrease dependence on paper documents, aiding environmental preservation.",
-//                subTitle: "Reducerea dependenței de documente pe hârtie, contribuind la conservarea mediului.",
                 icon: "tree.fill")
                 
         }.padding(.horizontal)
@@ -155,7 +151,6 @@ struct TitleView: View {
             .accessibility(hidden: true)
     
         Text("Welcome to")
-//        Text("Bine ați venit pe")
             .font(.title)
             .bold()
             .padding(-10)
@@ -169,7 +164,6 @@ struct TitleView: View {
             .padding(.bottom)
         
         Text("Simplifying mobile  document management!")
-//        Text("Simplificarea gestionării de documente pe mobil!")
             .font(.title)
             .bold()
             .padding(-10)
