@@ -22,7 +22,7 @@ struct SettingsRowView: View {
             
             Text(title)
                 .font(.subheadline)
-                .foregroundColor(.white)
+                .fontWeight(.bold)
         }
         
     }
