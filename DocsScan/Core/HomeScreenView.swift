@@ -61,7 +61,7 @@ struct HomeScreen: View {
                     
                     // ----- showing current user that is logged in -----
                     if viewModel.currentUser != nil {
-                        Text("Welcome back \(viewModel.currentUser?.fullname)")
+                        Text("Welcome back \((viewModel.currentUser?.fullname)!)!")
                             .font(.headline)
                             .foregroundColor(Color.passwordGreen)
                     } else {
@@ -78,23 +78,6 @@ struct HomeScreen: View {
     
 }
 
-struct ShowCurrentUser: View {
-    
-    var viewModel: AuthViewModel
-    
-    var body: some View {
-        if viewModel.currentUser != nil {
-            Text("Welcome back \(viewModel.currentUser?.fullname)")
-                .font(.subheadline)
-                .foregroundColor(.green)
-        } else {
-            Text("No user logged in!")
-                .font(.subheadline)
-                .foregroundColor(.red)
-        }
-    }
-    
-}
 
 struct InformationDetailView: View {
     var subTitle: String = "subtitle"
