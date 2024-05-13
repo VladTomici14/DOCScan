@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseStorage
 
 struct MainScreen: View {
     @State private var showScannerSheet = false
@@ -41,6 +42,7 @@ struct MainScreen: View {
                             ForEach (searchResults) { scan in NavigationLink(
                                 destination: {
                                     ScrollView {
+                                        
                                         
                                         // ------- scanned text content -------
                                         Text(scan.text_content)
@@ -171,6 +173,8 @@ struct MainScreen: View {
             }
         )
     }
+    
+
     
 }
 

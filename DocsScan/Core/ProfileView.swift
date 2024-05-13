@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var viewModel: AuthViewModel
-    
+    @Environment(\.dismiss) var dismiss
+
     var body: some View {
         if let user = viewModel.currentUser {
             List {
@@ -56,6 +57,7 @@ struct ProfileView: View {
                     
                     // ------- sign out button -------
                     Button {
+                        dismiss()
                         viewModel.signOut()
                     }  label: {
                         SettingsRowView(

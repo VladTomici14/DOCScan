@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VisionKit
+import FirebaseStorage
 
 class ScannedImagesHandler: NSObject {
     var scannedImages: [UIImage] = []
@@ -53,10 +54,13 @@ struct ScannerView: UIViewControllerRepresentable {
             for pageNumber in 0..<scan.pageCount {
                 let image = scan.imageOfPage(at: pageNumber)
 
+                uploadImage(withImage: image)
+                
                 scannedImagesHandler.addScannedImage(image)
                 print(image)
             }
             
+                
         }
         
         func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
@@ -67,7 +71,62 @@ struct ScannerView: UIViewControllerRepresentable {
         func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
             completionHandler(nil)
         }
+        
+        
+        // TODO: need to restructure the db and filenames
+        func uploadImage(withImage imageUpload: UIImage) {
+            if let imageData = imageUpload.jpegData(compressionQuality: 1) {
+                let storage = Storage.storage()
+                
+                storage.reference().child("images/image1.jpg").putData(imageData, metadata: nil) {
+                    (_, err) in
+                    if let err = err {
+                        print ("error occured: \(err)")
+                    } else {
+                        print("haha yes")
+                    }
+                }
+            }
+        }
+        
+//        func uploadPhoto(withImage uploadImage: UIImage) {
+//            
+//            // ------- making sure that the image is valid -------
+//    //        guard uploadImage != nil else {
+//    //            return
+//    //        }
+//            
+//            print("uploaded")
+//            
+//            // ------- creating storage reference -------
+//            let storageReference = Storage.storage().reference()
+//            
+//            // ------- turning our image into data -------
+//            let imageData = uploadImage.jpegData(compressionQuality: 0.8)
+//            
+//            guard imageData != nil else {
+//                return
+//            }
+//            
+//            let fileReference = storageReference.child("images/\(UUID().uuidString).jpg")
+//            
+//            // ------- uploading that data -------
+//            let uploadTask = fileReference.putData(
+//                imageData!,
+//                metadata: nil) { metadata, error in
+//                
+//                    if error == nil && metadata != nil {
+//                        // ------- save a reference in the firestore DB -------
+//                    }
+//            }
+//            
+//            print("success")
+//            
+//            // ------- saving a reference to that data in firestore -------
+//                
+//        }
     }
+    
     
     func makeUIViewController(context: Context) -> VNDocumentCameraViewController {
         let viewController = VNDocumentCameraViewController()
