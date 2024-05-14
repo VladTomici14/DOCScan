@@ -25,21 +25,26 @@ class ScannedImagesHandler: NSObject {
 struct ScannerView: UIViewControllerRepresentable {
     
     let scannedImagesHandler = ScannedImagesHandler()
+
+    @EnvironmentObject var viewModel: AuthViewModel
     
     func makeCoordinator() -> Coordinator {
         return Coordinator(
             completion: completionHandler,
-            scannedImagesHandler: scannedImagesHandler
+            scannedImagesHandler: scannedImagesHandler,
+            viewModel: viewModel
         )
     }
     
     final class Coordinator: NSObject, VNDocumentCameraViewControllerDelegate {
         private let completionHandler: ([String]?) -> Void
         private let scannedImagesHandler: ScannedImagesHandler
-        
-        init(completion: @escaping ([String]?) -> Void, scannedImagesHandler: ScannedImagesHandler) {
+        private let viewModel: AuthViewModel
+
+        init(completion: @escaping ([String]?) -> Void, scannedImagesHandler: ScannedImagesHandler, viewModel: AuthViewModel) {
             self.completionHandler = completion
             self.scannedImagesHandler = scannedImagesHandler
+            self.viewModel = viewModel
         }
         
         
@@ -54,7 +59,10 @@ struct ScannerView: UIViewControllerRepresentable {
             for pageNumber in 0..<scan.pageCount {
                 let image = scan.imageOfPage(at: pageNumber)
 
-                uploadImage(withImage: image)
+                // ------ uploading an image ------
+                uploadImage(withImage: image,
+                            withDirname: "upload1",
+                            withIndex: pageNumber)
                 
                 scannedImagesHandler.addScannedImage(image)
                 print(image)
@@ -72,13 +80,16 @@ struct ScannerView: UIViewControllerRepresentable {
             completionHandler(nil)
         }
         
-        
         // TODO: need to restructure the db and filenames
-        func uploadImage(withImage imageUpload: UIImage) {
+        func uploadImage(withImage imageUpload: UIImage, 
+                         withDirname saveDirname: String,
+                         withIndex saveIndex: Int) {
             if let imageData = imageUpload.jpegData(compressionQuality: 1) {
                 let storage = Storage.storage()
                 
-                storage.reference().child("images/image1.jpg").putData(imageData, metadata: nil) {
+                var userId = viewModel.currentUser?.id
+                
+                storage.reference().child("\(userId!)/\(saveDirname)/\(saveIndex).jpg").putData(imageData, metadata: nil) {
                     (_, err) in
                     if let err = err {
                         print ("error occured: \(err)")
