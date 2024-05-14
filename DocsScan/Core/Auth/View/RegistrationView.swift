@@ -95,8 +95,6 @@ struct RegistrationView: View {
                                     .foregroundColor((password.count >= 7) ? Color.passwordGreen : .gray)
                                 Text("• 1 number")
                                     .foregroundColor((containsNumberRegex(password)) ? Color.passwordGreen : .gray)
-                                Text("• 1 special character (! @ # $ % ^ & *)")
-                                    .foregroundColor((containsSpecialCharacterRegex(password)) ? Color.passwordGreen : .gray)
 
                             }.padding(.leading, 60)
                         }
@@ -118,6 +116,8 @@ struct RegistrationView: View {
                             .frame(maxWidth: .infinity, minHeight: 52)
                             .background(Color.mainBlue)
                             .cornerRadius(15.0)
+                            .disabled(formIsValid)
+                            .opacity(formIsValid ? 1.0 : 0.5)
                         }
                         
                         Spacer()
@@ -154,6 +154,7 @@ func containsSpecialCharacterRegex(_ password: String) -> Bool {
 }
 
 extension RegistrationView: AuthentificationFormProtocol {
+    // TODO: change these, there are way too many, and way too complicated and annoying
     var formIsValid: Bool {
         return 
             !email.isEmpty &&
@@ -161,7 +162,6 @@ extension RegistrationView: AuthentificationFormProtocol {
             !password.isEmpty &&
             password.count >= 7 &&
             containsNumberRegex(password) &&
-            containsSpecialCharacterRegex(password) &&
             confirm_password == password
     }
 }
