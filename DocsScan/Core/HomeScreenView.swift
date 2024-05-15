@@ -54,18 +54,20 @@ struct HomeScreen: View {
                             
                         },
                         label: {
-                            Text("Continue")
+                            Text("Continuă")
                                 .customButton()
                         }
                     )
                     
                     // ----- showing current user that is logged in -----
                     if viewModel.currentUser != nil {
-                        Text("Welcome back \((viewModel.currentUser?.fullname)!)!")
+//                        Text("Welcome back \((viewModel.currentUser?.fullname)!)!")
+                        Text("Utilizator curent: \((viewModel.currentUser?.fullname)!)")
                             .font(.headline)
                             .foregroundColor(Color.passwordGreen)
                     } else {
-                        Text("No user logged in!")
+//                        Text("No user logged in!")
+                        Text("Niciun utilizator autentificat!")
                             .font(.headline)
                             .foregroundColor(Color.passwordRed)
                     }
@@ -108,15 +110,18 @@ struct InformationContainerView: View {
     var body: some View {
         VStack(alignment: .leading) {
             InformationDetailView(
-                subTitle: "Maximize efficiency: automate text extraction, improve organization, optimize storage.",
+//                subTitle: "Maximize efficiency: automate text extraction, improve organization, optimize storage.",
+                subTitle: "Maximizarea eficienței: extracție de text automată, dezvoltarea organizării, optimizarea stocării.",
                 icon: "paperclip")
             
             InformationDetailView(
-                subTitle: "Boost accessibility: streamline access to diverse information and swiftly search scanned documents for specific data",
+//                subTitle: "Boost accessibility: streamline access to diverse information and swiftly search scanned documents for specific data",
+                subTitle: "Creșterea accesibilității: facilitează accesul la informații și permite căutarea de date specifice din documente.",
                 icon: "figure.run.circle.fill")
             
             InformationDetailView(
-                subTitle: "Decrease dependence on paper documents, aiding environmental preservation.",
+//                subTitle: "Decrease dependence on paper documents, aiding environmental
+                subTitle: "Reducerea dependenței de documente pe hârtie, contribuind la conservarea mediului.",
                 icon: "tree.fill")
                 
         }.padding(.horizontal)
@@ -133,7 +138,8 @@ struct TitleView: View {
             .frame(width: 250, alignment: .center)
             .accessibility(hidden: true)
     
-        Text("Welcome to")
+//        Text("Welcome to")
+        Text("Bine ați venit pe")
             .font(.title)
             .bold()
             .padding(-10)
@@ -146,7 +152,8 @@ struct TitleView: View {
             .accessibility(hidden: true)
             .padding(.bottom)
         
-        Text("Simplifying mobile  document management!")
+//        Text("Simplifying mobile  document management!")
+        Text("Simplifică-ți managamentul de documente!")
             .font(.title)
             .bold()
             .padding(-10)
