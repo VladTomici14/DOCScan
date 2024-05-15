@@ -6,6 +6,7 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var showForgottenPasswordView = false
+    @State private var showLoginError = false
     @EnvironmentObject var viewModel: AuthViewModel
 
     var body: some View {
@@ -27,15 +28,17 @@ struct LoginView: View {
                         // ----- form fileds -----
                         InputView(
                             text: $email,
-                            title: "Email Address",
+//                            title: "Email Address",
+                            title: "Adresă de email",
                             placeHolder:   "example@email.com",
                             isSeculreField: false)
                         .autocapitalization(.none)
                             
                         InputView(
                             text: $password,
-                            title: "Password",
-                            placeHolder: "Enter your password",
+//                            title: "Password",
+                            title: "Parolă",
+                            placeHolder: "Introduceți parola",
                             isSeculreField: true)
                         .autocapitalization(.none)
                         
@@ -43,7 +46,8 @@ struct LoginView: View {
                         Button {
                             showForgottenPasswordView.toggle()
                         } label: {
-                            Text("Forgot your password?")
+//                            Text("Forgot your password?")
+                            Text("Ai uitat parola?")
                                 .fontWeight(.semibold)
                                 .font(.footnote)
                                 .foregroundColor(Color.mainBlue)
@@ -57,7 +61,6 @@ struct LoginView: View {
                         // ----- sign in button -----
                         Button {
                             Task {
-                                print("test")
                                 try await viewModel.signIn(withEmail: email, password: password)
 
                             }
@@ -71,6 +74,8 @@ struct LoginView: View {
                             .frame(maxWidth: .infinity, minHeight: 52)
                             .background(Color.mainBlue)
                             .cornerRadius(15.0)
+                        }.alert("Message from SwiftUI", isPresented: $showLoginError) {
+                            Button("OK") { }
                         }
                         
 
@@ -105,8 +110,9 @@ struct LoginView: View {
                             },
                             label: {
                                 HStack() {
-                                    Text("Don't have an account ?")
-                                    Text("Sign up")
+//                                    Text("Don't have an account ?")
+                                    Text("Nu ai un cont?")
+                                    Text("Autentificare")
                                         .bold()
                                 }.foregroundColor(Color.mainBlue)
                             }

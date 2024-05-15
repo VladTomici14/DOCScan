@@ -17,6 +17,7 @@ struct RegistrationView: View {
     @State private var password: String = ""
     @State private var confirm_password: String = ""
     @EnvironmentObject var viewModel: AuthViewModel
+    @State private var showingAlert = false
     // TODO: possible need of adding this, check 1:01:55 from the video
     // @Environment(\.dismiss) var dismiss
     
@@ -38,22 +39,25 @@ struct RegistrationView: View {
                     VStack(spacing: 24) {
                         InputView(
                             text: $fullname,
-                            title: "Fullname",
-                            placeHolder: "Ex: Joe Doe",
+//                            title: "Fullname",
+                            title: "Nume complet",
+                            placeHolder: "Ex: Ion Popescu",
                             isSeculreField: false)
                         .autocapitalization(.words)
                         
                         InputView(
                             text: $email,
                             title: "Email",
-                            placeHolder: "Enter your email",
+//                            placeHolder: "Enter your email",
+                            placeHolder: "Ex: muraturi123@gmail.com",
                             isSeculreField: false)
                         .autocapitalization(.none)
                         
                         InputView(
                             text: $password,
-                            title: "Password",
-                            placeHolder: "Enter your password",
+//                            title: "Password",
+                            title: "Parolă",
+                            placeHolder: "Ex: temalamate1",
                             isSeculreField: true)
                         .autocapitalization(.none)
                                                 
@@ -61,8 +65,8 @@ struct RegistrationView: View {
                             
                             InputView(
                                 text: $confirm_password,
-                                title: "Confirm password",
-                                placeHolder: "Re-enter your password",
+                                title: "Confirmați parola",
+                                placeHolder: "Reintroduceți parola",
                                 isSeculreField: true)
                             .autocapitalization(.none)
                             
@@ -85,15 +89,18 @@ struct RegistrationView: View {
                         
                         VStack(alignment: .leading, spacing: 5){
                             HStack{
-                                Text("Your password must contain at least:")
+//                                Text("Your password must contain at least:")
+                                Text("Parola dvs. trebuie sa conțină:")
                                     .padding(.leading, 20)
                                     .foregroundColor(.gray)
                                 Spacer()
                             }
                             Group{
-                                Text("• 7 characters")
+//                                Text("• 7 characters")
+                                Text("• 7 caractere")
                                     .foregroundColor((password.count >= 7) ? Color.passwordGreen : .gray)
-                                Text("• 1 number")
+//                                Text("• 1 number")
+                                Text("• 1 cifră")
                                     .foregroundColor((containsNumberRegex(password)) ? Color.passwordGreen : .gray)
 
                             }.padding(.leading, 60)
@@ -125,7 +132,6 @@ struct RegistrationView: View {
                     .padding(.horizontal)
                     .padding(.top, 24)
                     
-
                 }
                 
             }

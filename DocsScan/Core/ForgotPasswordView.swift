@@ -20,7 +20,8 @@ struct ForgotPasswordView: View {
             WaveBackground(waveOpacity: 0.05)
             
             VStack {
-                Text("Enter your recovery email")
+//                Text("Enter your recovery email")
+                Text("Introdu email-ul de recuperare")
                     .font(.title)
                     .fontWeight(.bold)
                 
@@ -29,7 +30,7 @@ struct ForgotPasswordView: View {
                     // ----- recovery email input field -----
                     InputView(
                         text: $recoveryEmail,
-                        title: "Recovery email",
+                        title: "Email de recuperare",
                         placeHolder:   "example@email.com",
                         isSeculreField: false)
                     .autocapitalization(.none)
@@ -43,7 +44,8 @@ struct ForgotPasswordView: View {
                         }
                     } label: {
                         HStack {
-                            Text("Send recovery email")
+//                            Text("Send recovery email")
+                            Text("Trimite email de recuperare")
                             Image(systemName: "arrow.uturn.left")
                         }.foregroundColor(Color.mainBlue)
                     }
