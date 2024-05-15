@@ -34,6 +34,7 @@ struct ContentView: View {
 //            HomeScreen()
 //        }
         HomeScreen()
+//        PullingImagesView()
         
     }
 }
