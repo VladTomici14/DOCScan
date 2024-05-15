@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseStorage
+import Firebase
 
 struct MainScreen: View {
     @State private var showScannerSheet = false
@@ -45,21 +46,24 @@ struct MainScreen: View {
                                         
                                         
                                         // ------- scanned text content -------
-                                        Text(scan.text_content)
+                                        Text(writeTextToDB(withText: scan.text_content))
                                             .padding()
                                             .textSelection(.enabled)
+                                            
+                                        
+                                        // ------- upload text content to db -------
+                                        
                                         
                                         // ------- instructions for text copy -------
-                                        Text("(Hold and press 'Copy' to effortlessly copy text)")
+//                                        Text("(Hold and press 'Copy' to effortlessly copy text)")
+                                        Text("(Tineți apăsat si apăsați 'Copy' pentru copierea textului)")
                                             .font(.caption)
                                             .foregroundColor(.gray)
                                         
                                         // ------- images from the scan -------
-                                        var images = ["ss-corect","ss-2","ss-3", "ss-4", "ss-5", "ss-6", "ss-7"]
-                                        // TODO: regarding the size of the scans, we can make a thing for the ImageSlideView either to be landscape or portrait (depends on how many pictures were took landscape or portrait moded
-                                        ImageSliderView(images: images)
-                                            .ignoresSafeArea()
-                                            .frame(height: 600)
+//                                        ImageSliderView(images: pullImages)
+//                                            .ignoresSafeArea()
+//                                            .frame(height: 600)
                                         
                                     }.navigationTitle(scan.date)
                                     
@@ -74,7 +78,8 @@ struct MainScreen: View {
                             }
                         }
                     } else {
-                        Text("No scan done yet!")
+//                        Text("No scan done yet!")
+                        Text("Nicio scanare efectuată!")
                             .font(.title)
                     }
                 }
@@ -132,7 +137,8 @@ struct MainScreen: View {
             label: {
                 HStack {
                     Image(systemName: "doc.on.doc")
-                    Text("Scan your document")
+//                    Text("Scan your document")
+                    Text("Scanează un document")
                 }
                 .foregroundColor(.white)
                 .font(.system(size: 16, weight: .semibold))
@@ -150,12 +156,60 @@ struct MainScreen: View {
         
     }
     
+    
     var searchResults: [ScanData] {
         if searchText.isEmpty {
             return scans
         } else {
             return scans.filter { $0.text_content.lowercased().contains(searchText.lowercased()) }
         }
+    }
+    
+//    var pullImages: [UIImage] {
+//        let storageReference = Storage.storage().reference().child("\(viewModel.currentUser?.id)/upload1/")
+//        
+//        var imageString: [UIImage] = []
+//        
+//        storageReference.listAll { result, error in
+//            if let error = error {
+//                print("Error fetching images from db")
+//            } else {
+//                for item in result!.items {
+//                    item.getData(maxSize: 1 * 1024 * 1024) { data, error in
+//                        if let error = error {
+//                            print("failed to process images")
+//                        } else {
+//                            if let imageData = data, let image = UIImage(data: imageData) {
+//                                DispatchQueue.main.async {
+//                                    imageString.append(image)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        
+//        return imageString
+//    }
+
+    
+    func writeTextToDB(withText text: String) -> String {
+        let dbReference = Database.database().reference()
+        
+        let textReference = dbReference.child("users/\(viewModel.currentUser?.id)/")
+        
+        textReference.setValue(text) { error, _ in
+                    if let error = error {
+                        print("Error saving text to database: \(error.localizedDescription)")
+                    } else {
+                        print("Text saved successfully!")
+                    }
+                }
+        
+        print(text)
+        
+        return text
     }
     
     private func makeScannerView() -> ScannerView {
@@ -183,11 +237,11 @@ struct ImageSliderView: View {
      Function for showing the images to the use by sliding.
      */
     private let CORNER_RADIUS: CGFloat = 10.0
-    private var images_paths: [String] = []
+    private var uiimages: [UIImage] = []
     @State private var selection = 0
     
-    init (images: [String]) {
-        self.images_paths = images
+    init (images: [UIImage]) {
+        self.uiimages = images
     }
     
     var body: some View {
@@ -195,8 +249,8 @@ struct ImageSliderView: View {
         ZStack {
             
             TabView(selection: $selection) {
-                ForEach (0..<images_paths.count) { i in
-                    Image("\(images_paths[i])")
+                ForEach (0..<uiimages.count) { i in
+                    Image(uiImage: uiimages[i])
                         .resizable()
                         .frame(width: .infinity)
                         .ignoresSafeArea()
