@@ -42,7 +42,8 @@ struct ProfileView: View {
                     HStack {
                         SettingsRowView(
                             imageName: "gear",
-                            title: "Version",
+//                            title: "Version",
+                            title: "Versiune",
                             tintColor: Color(.systemGray))
                         
                         Spacer()
@@ -53,7 +54,8 @@ struct ProfileView: View {
                     }
                 }
                 
-                Section ("Account") {
+//                Section ("Account") {
+                Section ("Cont") {
                     
                     // ------- sign out button -------
                     Button {
@@ -62,7 +64,8 @@ struct ProfileView: View {
                     }  label: {
                         SettingsRowView(
                             imageName: "arrow.left.circle.fill",
-                            title: "Sign Out",
+//                            title: "Sign Out",
+                            title: "Deconectare",
                             tintColor: Color(.red))
                     }
                     
