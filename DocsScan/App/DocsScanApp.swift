@@ -32,6 +32,7 @@ struct DocsScanApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(viewModel)
+                .preferredColorScheme(.light)
         }
     }
 }
