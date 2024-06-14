@@ -59,15 +59,15 @@ DOCScan is developed using Swift and the SwiftUI framework. Swift is an object-o
 1. **Welcome Screen** – Users can learn about the application and choose to log in or create an account.
 2. **Login/Sign Up** – Users can log in with an existing account or sign up to create a new account.
 
-<img src="assets/documentation-assets/login-register-screens.png" style="width: 650px; border-radius: 50px;">
+<img src="assets/documentation-assets/login-register-screens.png" style="width: 650px; border-radius: 15px;">
 
 3. **Scanning Documents** – Users can scan documents by positioning their phone over the document. The application automatically detects the document area and captures the image.
 
-<img src="assets/documentation-assets/scan-screen.png" style="width: 650px; border-radius: 50px;">
+<img src="assets/documentation-assets/scan-screen.png" style="width: 650px; border-radius: 15px;">
 
 4. **Editing Scans** – Users can edit scans by cropping, applying filters, or rotating the image. After editing, the scan is saved, and the detected text is displayed.
 
-<img src="assets/documentation-assets/extracted-page-screen.png" style="width: 650px; border-radius: 50px;">
+<img src="assets/documentation-assets/extracted-page-screen.png" style="width: 650px; border-radius: 15px;">
 
 # Login/Authentication System
 ### _System Architecture_
@@ -76,19 +76,19 @@ The authentication system saves user details (full name, email, and password) in
 ### _Firebase Integration_
 DOCScan uses Firebase for backend infrastructure, providing NoSQL databases, user authentication, cloud storage, and security features. Firebase Auth handles user authentication, while Firestore manages the database.
 
-<img src="assets/documentation-assets/registration-architecture.png" style="width: 650px; border-radius: 50px;">
+<img src="assets/documentation-assets/registration-architecture.png" style="width: 650px; border-radius: 15px;">
 
 # Document Scanning System
 ### _Image to Digital Conversion_
 DOCScan converts scanned images to digital format, allowing users to work with the text extracted from the documents.
 
-<img src="assets/documentation-assets/page-detection-steps.png" style="width: 650px; border-radius: 50px;">
+<img src="assets/documentation-assets/page-detection-steps.png" style="width: 650px; border-radius: 15px;">
 
 
 ### _Applying Filters_
 Users can apply various filters to the scanned documents to enhance the quality and readability of the text.
 
-<img src="assets/documentation-assets/color-filters-example.png" style="width: 650px; border-radius: 50px;">
+<img src="assets/documentation-assets/color-filters-example.png" style="width: 650px; border-radius: 15px;">
 
 
 # Text Extraction System
@@ -98,7 +98,7 @@ DOCScan uses Natural Language Processing (NLP) to process and extract text from 
 ### _Post-Processing and Display_
 The extracted text is displayed in the application, allowing users to copy and use it as needed. The scans and texts are stored in the cloud for easy access from any device.
 
-<img src="assets/documentation-assets/extracted-text-screen.png" style="width: 650px; border-radius: 50px;">
+<img src="assets/documentation-assets/extracted-text-screen.png" style="width: 650px; border-radius: 15px;">
 
 
 # Bibliography
